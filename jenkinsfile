@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checkout from source...'
-                Checkout scm
+                checkout scm
             }
         }
         stage('WebApp Build') {
