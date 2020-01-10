@@ -1,0 +1,26 @@
+pipeline {
+    agent: any
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checkout from source...'
+                Checkout scm
+            }
+        }
+        stage('WebApp Build') {
+            steps {
+                dir('angular-app')
+                echo 'Installing npm packages...'
+                bat 'npm install'
+                echo 'Ng Build...'
+                bat 'ng build'
+            }
+        }
+        stage('DotNet Build') {
+            steps {
+                dir('driverapi')
+                bat 'dotnet build'
+            }
+        }
+    }
+}
